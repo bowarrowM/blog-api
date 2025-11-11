@@ -1,0 +1,82 @@
+# ==========================
+# Python
+# ==========================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# ==========================
+# Django
+# ==========================
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+media/
+staticfiles/
+static_root/
+*.pot
+*.pyc
+
+# ==========================
+# Environment / Secrets
+# ==========================
+.env
+.env.local
+.env.*.local
+*.env
+
+# ==========================
+# IDE / Editor files
+# ==========================
+.vscode/
+.idea/
+*.swp
+*.swo
+*.swn
+*.bak
+
+# ==========================
+# macOS / Windows
+# ==========================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ==========================
+# PyCharm / JetBrains
+# ==========================
+*.iml
+.idea/
+
+# ==========================
+# Misc
+# ==========================
+*.tmp
+*.log
+*.out
+*.err
