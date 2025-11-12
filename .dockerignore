@@ -1,66 +1,23 @@
-# Python
+# .dockerignore
+
+# Python virtual environment
+venv
+
+# Byte-code files
+*.pyc
 __pycache__
-*.py[cod]
-*$py.class
-*.so
-.Python
-env/
-venv/
-ENV/
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
 
-# Django
-*.log
-local_settings.py
-db.sqlite3
-db.sqlite3-journal
-/staticfiles/
-/media/
-
-# Environment
+# Environment variables file
 .env
-.env.local
-.env.*.local
 
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
+# Common IDE folders (Crucial if you use an IDE like PyCharm or VS Code)
+.vscode
+.idea
 
-# OS
-.DS_Store
-Thumbs.db
+# Logs and databases (if not in a persistent volume)
+*.log
+*.sqlite3
 
-# Git
+# Git files
 .git
 .gitignore
-
-# Docker
-Dockerfile
-docker-compose*.yml
-.dockerignore
-
-# Documentation
-README.md
-*.md
-
-# Tests
-.coverage
-htmlcov/
-.pytest_cache/

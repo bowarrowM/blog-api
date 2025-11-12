@@ -1,42 +1,39 @@
-version: '3.9'
+# docker-compose.yml
+version: '3.8'
 
 services:
-  # PostgreSQL Database
-  db:
+  # 1. PostgreSQL Database Service
+  db: 
     image: postgres:15-alpine
+    container_name: blog_db_container
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      # Persist the database data outside the container
+      - postgres_data:/var/lib/postgresql/data/
     environment:
-      - POSTGRES_DB=blog_db
-      - POSTGRES_USER=blog_user
-      - POSTGRES_PASSWORD=blog_password
+      # These must match the values used by python-decouple in your .env file
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
     ports:
-      - "5432:5432"
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U blog_user -d blog_db"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+      - "5432:5432" # Optional: map the port if you need to access the DB from your host machine
 
-  # Django Web Application
+  # 2. Django Application Service
   web:
     build: .
+    container_name: blog_app_container
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
+      # Mount the current directory into the container for live code changes (dev)
       - .:/app
     ports:
       - "8000:8000"
-    environment:
-      - DEBUG=True
-      - SECRET_KEY=django-insecure-docker-dev-key-change-in-production
-      - DATABASE_NAME=blog_db
-      - DATABASE_USER=blog_user
-      - DATABASE_PASSWORD=blog_password
-      - DATABASE_HOST=db
-      - DATABASE_PORT=5432
+    env_file:
+      # Load environment variables from your local .env file
+      - ./.env
     depends_on:
-      db:
-        condition: service_healthy
+      # Ensure the DB starts before the web app tries to connect
+      - db
 
+# Define volumes for persistent data storage
 volumes:
   postgres_data:
