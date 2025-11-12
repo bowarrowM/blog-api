@@ -83,6 +83,7 @@ def update(self, instance, validated_data):
 class ArticleListSerializer(serializers.ModelSerializer): #Simplified version for listing articles efficiently.
     author_name=serializers.CharField(source='author.username', read_only=True)
     tag_count=serializers.SerializerMethodField()
+    excerpt=serializers.SerializerMethodField()
     
     class Meta:
         model=Article
@@ -92,6 +93,14 @@ class ArticleListSerializer(serializers.ModelSerializer): #Simplified version fo
         ]
     def get_tag_count(self, obj):
         return obj.article_tags.count() #Counts tags related to the article.
+    
+    
+    def get_excerpt(self, obj):
+        
+        if obj.body: #Return first 100 characters of article body
+            return obj.body[:100] + ('...' if len(obj.body) > 100 else '')
+        return ""
+    
     
     """ summary
     Articles → many-to-many → Tags (through ArticleTag),
