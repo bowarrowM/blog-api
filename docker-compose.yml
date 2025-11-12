@@ -1,0 +1,39 @@
+# docker-compose.yml
+version: '3.8'
+
+services:
+  # 1. PostgreSQL Database Service
+  db: 
+    image: postgres:15-alpine
+    container_name: blog_db_container
+    volumes:
+      # Persist the database data outside the container
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      # These must match the values used by python-decouple in your .env file
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "5432:5432" # Optional: map the port if you need to access the DB from your host machine
+
+  # 2. Django Application Service
+  web:
+    build: .
+    container_name: blog_app_container
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      # Mount the current directory into the container for live code changes (dev)
+      - .:/app
+    ports:
+      - "8000:8000"
+    env_file:
+      # Load environment variables from your local .env file
+      - ./.env
+    depends_on:
+      # Ensure the DB starts before the web app tries to connect
+      - db
+
+# Define volumes for persistent data storage
+volumes:
+  postgres_data:

@@ -1,0 +1,23 @@
+# .dockerignore
+
+# Python virtual environment
+venv
+
+# Byte-code files
+*.pyc
+__pycache__
+
+# Environment variables file
+.env
+
+# Common IDE folders (Crucial if you use an IDE like PyCharm or VS Code)
+.vscode
+.idea
+
+# Logs and databases (if not in a persistent volume)
+*.log
+*.sqlite3
+
+# Git files
+.git
+.gitignore
