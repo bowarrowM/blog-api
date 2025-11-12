@@ -6,17 +6,17 @@ This project demonstrates fundamental CRUD operations, database relationships, f
 This project was  built to teach developers with no backend experience start their journey. Comments were added throughout the project as guidance.
 Main files to focus on:
 
-/config/settings.py
-/config/urls.py
+- /config/settings.py
+- /config/urls.py
 
-/blog/models.py
-/blog/serializers.py
-/blog/urls.py
-/blog/admin.py
-/blog/views.py
+- /blog/models.py
+- /blog/serializers.py
+- /blog/urls.py
+- /blog/admin.py
+- /blog/views.py
 
 important mention:
-"""project-root/.env"""
+- """project-root/.env"""
 
 File is gitignored for safety reasons. Creating and utilizing one is best practice.
 
